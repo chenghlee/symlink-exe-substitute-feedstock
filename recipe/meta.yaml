@@ -64,11 +64,11 @@ outputs:
           "%PREFIX%\Library\bin\zstd.exe"
           "%PREFIX%\Library\mingw-w64\bin\xzcat.exe"
           "%PREFIX%\Scripts"
-        - dir "%PREFIX%\Scripts\xz.exe"
-        - dir "%PREFIX%\Scripts\zstd.exe"
-        - dir "%PREFIX%\Scripts\xzcat.exe"
+        - if not exist "%PREFIX%\Scripts\xz.exe" exit 1
+        - if not exist "%PREFIX%\Scripts\xzcat.exe" exit 1
+        - if not exist "%PREFIX%\Scripts\zstd.exe" exit 1
         - '"%PREFIX%\Scripts\xz.exe" --version | findstr "/C:XZ Utils"'
-        - '"%PREFIX%\Scripts\zstd.exe" --version | findstr "/C:zstd"'
+        - '"%PREFIX%\Scripts\zstd.exe" --version | findstr /r /i "\<zstd\> \<zstandard\>"'
         - '"%PREFIX%\Scripts\xzcat.exe" --version | findstr "/C:XZ Utils"'
 
 about:
